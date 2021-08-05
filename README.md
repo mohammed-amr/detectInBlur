@@ -20,8 +20,30 @@ To evaluate models, first download model weights from here: [Link](none).
 
 Any remedies that need specific flags are explained in the args section.
 
+An eval command for evaluating a model looks like:
+
+```python evaluate.py  -j 3 --tensorboard_path evals/test --blur_eval --gpu_blur --data_path /mnt/data_f2/mosayed/COCO/coco/ --resume weights/model.pth```
+
+If the model needs to be evaluated with expanded bounding boxes or the evaluation is on expanded bounding boxes, use:
+
+```python evaluate.py  -j 3 --tensorboard_path evals/test --blur_eval --gpu_blur --data_path /mnt/data_f2/mosayed/COCO/coco/ --resume weights/model.pth --expand_target_boxes```
 
 ## Training Models
 `train.py` will by default run through all ranges of exposure and blur type. You'll need to specify `--blur_eval` and hardware `--gpu_blur` or `--cpu_blur`. 
 
+A base command for launching training on two GPUs with 8 images in a batch per GPU, blurring with pregenerated random kernels on the GPU, and using stored PSFs looks something like this: 
 
+```CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2  --use_env train.py  -j 3 -b 8 --lr 0.04 --epochs 35 --lr-steps 16 21 --aspect-ratio-group-factor 3 --model fasterrcnn_resnet50_fpn --tensorboard_path runs/test --output_dir weights/test --pretrained --blur_train --gpu_blur --data_path /mnt/data_f2/mosayed/COCO/coco/ --stored_psf_directory /mnt/data_f2/mosayed/COCO/coco/psfs --use_stored_psfs```
+
+If say you wanted to train with high exposure kernels and only type P3, you'd instead do: 
+
+```CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2  --use_env train.py  -j 3 -b 8 --lr 0.04 --epochs 35 --lr-steps 16 21 --aspect-ratio-group-factor 3 --model fasterrcnn_resnet50_fpn --tensorboard_path runs/test --output_dir weights/test --pretrained --blur_train --gpu_blur --data_path /mnt/data_f2/mosayed/COCO/coco/ --stored_psf_directory /mnt/data_f2/mosayed/COCO/coco/psfs --use_stored_psfs --param_index 3 --high_exposure```
+
+If you wanted expanded bounding boxes, you'd do: 
+
+```CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2  --use_env train.py  -j 3 -b 8 --lr 0.04 --epochs 35 --lr-steps 16 21 --aspect-ratio-group-factor 3 --model fasterrcnn_resnet50_fpn --tensorboard_path runs/test --output_dir weights/test --pretrained --blur_train --gpu_blur --data_path /mnt/data_f2/mosayed/COCO/coco/ --stored_psf_directory /mnt/data_f2/mosayed/COCO/coco/psfs --use_stored_psfs --param_index 3 --high_exposure --expand_target_boxes```
+
+
+
+## Blur Estimators
+`train_blur_estimator.py` will allow you to train a small classifier for inferring the type of blur in an image. Blur flags are similar to `train.py`. We use this classifier for our final proposed model. There are two flavors of estimator. One that can detect among 16 different classes, and one that has coarser prediction over just four classes. To switch between them, use the `--LEHE` flag.
