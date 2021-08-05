@@ -33,6 +33,14 @@ For ensemble models, you'll need to specifiy the blur estimator weights path alo
 
 ```python evaluate.py  -j 3 --tensorboard_path evals/test --blur_eval --gpu_blur --data_path /mnt/data_f2/mosayed/COCO/coco/ --expand_target_boxes --use_ensemble --LEHE --blur_estimator_path weights/lehe_blur_eatimator.pth --ensemble_model_paths "weights/blurLEExpand.pth weights/blurP1HEExpand.pth weights/blurP2HEExpand.pth weights/blurP3HEExpand.pth"```
 
+For datasets with natural blur, you'll need to specify the dataset's name and location. You'll also have to specify if you want to evaluate sharp or blurry images via `--blurred_dataset`. For example, to evaluate GOPRO's blurred set with a pretrained model, you'd do: 
+
+`python evaluate.py -j 3 --tensorboard_path evals/test --pretrained --dataset GOPRO --data_path /media/mosayed/data_f_256/datasets/GOPRO --blurred_dataset`
+
+For the set with expanded labels, use: 
+
+`python evaluate.py -j 3 --tensorboard_path evals/test --pretrained --dataset GOPROSynthLoad --data_path /media/mosayed/data_f_256/datasets/GOPROSynth --blurred_dataset --expand_target_boxes`
+
 
 ## Training Models
 `train.py` will by default run through all ranges of exposure and blur type. You'll need to specify `--blur_eval` and hardware `--gpu_blur` or `--cpu_blur`. 
