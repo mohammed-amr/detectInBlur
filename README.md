@@ -53,3 +53,4 @@ If you wanted expanded bounding boxes, you'd do:
 
 ## Blur Estimators
 `train_blur_estimator.py` will allow you to train a small classifier for inferring the type of blur in an image. Blur flags are similar to `train.py`. We use this classifier for our final proposed model. There are two flavors of estimator. One that can detect among 16 different classes, and one that has coarser prediction over just four classes. To switch between them, use the `--LEHE` flag.
+
