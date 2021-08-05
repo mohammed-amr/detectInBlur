@@ -28,6 +28,12 @@ If the model needs to be evaluated with expanded bounding boxes or the evaluatio
 
 ```python evaluate.py  -j 3 --tensorboard_path evals/test --blur_eval --gpu_blur --data_path /mnt/data_f2/mosayed/COCO/coco/ --resume weights/model.pth --expand_target_boxes```
 
+For ensemble models, you'll need to specifiy the blur estimator weights path along with four ensemble model weights paths. Make sure to specify the type of ensemble by using the 
+`--LEHE` flag. For example:
+
+```python evaluate.py  -j 3 --tensorboard_path evals/test --blur_eval --gpu_blur --data_path /mnt/data_f2/mosayed/COCO/coco/ --expand_target_boxes --use_ensemble --LEHE --blur_estimator_path weights/lehe_blur_eatimator.pth --ensemble_model_paths "weights/blurLEExpand.pth weights/blurP1HEExpand.pth weights/blurP2HEExpand.pth weights/blurP3HEExpand.pth"```
+
+
 ## Training Models
 `train.py` will by default run through all ranges of exposure and blur type. You'll need to specify `--blur_eval` and hardware `--gpu_blur` or `--cpu_blur`. 
 
