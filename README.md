@@ -14,7 +14,7 @@ You can also specify the type of blur kernel via `--param_index` with available 
 
 ## Evaluating Models
 
-To evaluate models, first download model weights from here: [Link](none). 
+To evaluate models, first download model weights from [here]. 
 
 `evaluate.py` will by default run through all ranges of exposure and blur type. You'll need to specify `--blur_eval` and hardware `--gpu_blur` or `--cpu_blur`. 
 
