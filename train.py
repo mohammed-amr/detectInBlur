@@ -365,7 +365,6 @@ def main(args):
             device = device,
             early_stop = args.early_stop,
             distributed_mode = args.distributed,
-            vanilla_eval = args.vanilla_eval,
             blurring_images = True, 
             gpu_blur = args.gpu_blur, 
             expand_target_boxes = args.expand_target_boxes,
