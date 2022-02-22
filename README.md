@@ -3,7 +3,7 @@ Code for the CVPR 2021 paper "Improved Handling of Motion Blur in Online Object 
 
 [[Project Page](http://visual.cs.ucl.ac.uk/pubs/handlingMotionBlur/)] [[Paper](http://visual.cs.ucl.ac.uk/pubs/handlingMotionBlur/Improved_Handling_of_Motion_Blur_in_Online_Object_Detection_CVPR2021.pdf)] [[Video](https://www.youtube.com/watch?v=NhH012avygI&t=31s&ab_channel=MohamedSayed)]
 
-Most of this repo is based on the detection reference code from TorchVision, found [here](https://github.com/pytorch/vision/tree/master/references/detection).
+Most of this repo is based on the detection reference code from `torchvision`, found [here](https://github.com/pytorch/vision/tree/master/references/detection).
 
 ## Motion Blur
 Blur kernel generation is explained in the paper and the supplemental. To specify that blurring should take place for both training and evaluation, use the `--blur_train` and `--blur_eval` flags respectively. This alone isn't enough, you must also specify how you want images to be blurred. Either on the GPU, `--gpu_blur`, or CPU, `--cpu_blur`. CPU blurring happens in the fourier domain while GPU blurring is done by a basic sparse correlation loop. We recommend the latter as it's faster to perform on the GPU and prevents the data_loader from being choked.
