@@ -8,7 +8,7 @@ Most of this repo is based on the detection reference code from TorchVision, fou
 ## Motion Blur
 Blur kernel generation is explained in the paper and the supplemental. To specify that blurring should take place for both training and evaluation, use the `--blur_train` and `--blur_eval` flags respectively. This alone isn't enough, you must also specify how you want images to be blurred. Either on the GPU, `--gpu_blur`, or CPU, `--cpu_blur`. CPU blurring happens in the fourier domain while GPU blurring is done by a basic sparse correlation loop. We recommend the latter as it's faster to perform on the GPU and prevents the data_loader from being choked.
 
-For evaluation, a transform will generate blur kernels on the fly. For training, we recommend you first create and store blur kernels using , and then load them for each image to speed up training. To use stored PSFs, use `--use_stored_psfs`.
+For evaluation, a transform will generate blur kernels on the fly. For training, we recommend you first create and store blur kernels using `generate_PSFs.py`, and then load them for each image to speed up training. To use stored PSFs, use `--use_stored_psfs`.
 
 You can also specify the type of blur kernel via `--param_index` with available types: 1, 2, 3. You can specify the exposure range of the blur kernel via `--high_exposure` (4,5) and `--low_exposure` (1,2,3).
 
