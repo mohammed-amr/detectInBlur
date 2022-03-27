@@ -14,7 +14,7 @@ You can also specify the type of blur kernel via `--param_index` with available 
 
 ## Evaluating Models
 
-To evaluate models, first download model weights from [here]. 
+To evaluate models, first download model weights from [https://drive.google.com/drive/folders/1_W40yar1wsKacrM0DPYS2kkTEfsynMTD?usp=sharing] [here]. 
 
 `evaluate.py` will by default run through all ranges of exposure and blur type. You'll need to specify `--blur_eval` and hardware `--gpu_blur` or `--cpu_blur`. 
 
@@ -22,16 +22,16 @@ Any remedies that need specific flags are explained in the args section.
 
 An eval command for evaluating a model looks like:
 
-```python evaluate.py  -j 3 --tensorboard_path evals/test --blur_eval --gpu_blur --data_path /mnt/data_f2/mosayed/COCO/coco/ --resume weights/model.pth```
+```python evaluate.py  -j 3 --tensorboard_path evals/test --blur_eval --gpu_blur --data_path /mnt/data_f2/mosayed/COCO/coco/ --resume weights/resnet50FPNBlur.pth```
 
 If the model needs to be evaluated with expanded bounding boxes or the evaluation is on expanded bounding boxes, use:
 
-```python evaluate.py  -j 3 --tensorboard_path evals/test --blur_eval --gpu_blur --data_path /mnt/data_f2/mosayed/COCO/coco/ --resume weights/model.pth --expand_target_boxes```
+```python evaluate.py  -j 3 --tensorboard_path evals/test --blur_eval --gpu_blur --data_path /mnt/data_f2/mosayed/COCO/coco/ --resume weights/resnet50FPNBlurExpand.pth --expand_target_boxes```
 
 For ensemble models, you'll need to specifiy the blur estimator weights path along with four ensemble model weights paths. Make sure to specify the type of ensemble by using the 
 `--LEHE` flag. For example:
 
-```python evaluate.py  -j 3 --tensorboard_path evals/test --blur_eval --gpu_blur --data_path /mnt/data_f2/mosayed/COCO/coco/ --expand_target_boxes --use_ensemble --LEHE --blur_estimator_path weights/lehe_blur_eatimator.pth --ensemble_model_paths "weights/blurLEExpand.pth weights/blurP1HEExpand.pth weights/blurP2HEExpand.pth weights/blurP3HEExpand.pth"```
+```python evaluate.py  -j 3 --tensorboard_path evals/test --blur_eval --gpu_blur --data_path /mnt/data_f2/mosayed/COCO/coco/ --expand_target_boxes --use_ensemble --LEHE --blur_estimator_path weights/SpecByExpEstimator.pth --ensemble_model_paths "weights/resnet50FPNBlurLEExpand.pth weights/resnet50FPNBlurP1HEExpand.pth weights/resnet50FPNBlurP2HEExpand.pth weights/resnet50FPNBlurP3HEExpand.pth"```
 
 For datasets with natural blur, you'll need to specify the dataset's name and location. You'll also have to specify if you want to evaluate sharp or blurry images via `--blurred_dataset`. For example, to evaluate GOPRO's blurred set with a pretrained model, you'd do: 
 
