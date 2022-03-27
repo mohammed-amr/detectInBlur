@@ -1,7 +1,7 @@
 ]# detectInBlur
 Code for the CVPR 2021 paper "Improved Handling of Motion Blur in Online Object Detection"
 
-[[Project Page](http://visual.cs.ucl.ac.uk/pubs/handlingMotionBlur/)] [[Paper](http://visual.cs.ucl.ac.uk/pubs/handlingMotionBlur/Improved_Handling_of_Motion_Blur_in_Online_Object_Detection_CVPR2021.pdf)] [[Video](https://www.youtube.com/watch?v=NhH012avygI&t=31s&ab_channel=MohamedSayed)] [Weights(https://drive.google.com/drive/folders/1_W40yar1wsKacrM0DPYS2kkTEfsynMTD?usp=sharing)]
+[[Project Page](http://visual.cs.ucl.ac.uk/pubs/handlingMotionBlur/)] [[Paper](http://visual.cs.ucl.ac.uk/pubs/handlingMotionBlur/Improved_Handling_of_Motion_Blur_in_Online_Object_Detection_CVPR2021.pdf)] [[Video](https://www.youtube.com/watch?v=NhH012avygI&t=31s&ab_channel=MohamedSayed)] [[Weights](https://drive.google.com/drive/folders/1_W40yar1wsKacrM0DPYS2kkTEfsynMTD?usp=sharing)]
 
 Most of this repo is based on the detection reference code from `torchvision`, found [here](https://github.com/pytorch/vision/tree/master/references/detection).
 
